@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class JobController extends Controller
 {
-    public function index(){
-        $title = 'Available Jobs';
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): View
+    {
         $jobs = [
             'Web Developer',
             'Database Admin',
@@ -16,10 +19,54 @@ class JobController extends Controller
             'System Analyst'
         ];
 
-        return view('jobs.index', compact('title','jobs'));
+        return view('jobs.index', compact('jobs'));
     }
 
-    public function create(){
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): View
+    {
         return view('jobs.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request): string
+    {
+        return "store";
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id): string
+    {
+        return 'show';
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id): string
+    {
+        return 'Update';
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id): string
+    {
+        return 'destroy';
     }
 }
