@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BookmarkController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::resource('jobs', JobController::class);
@@ -21,3 +22,8 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.update');
+    Route::post('/bookmarks/{job}', [BookmarkController::class, 'store'])->name('bookmarks.store');
+    Route::delete('/bookmarks/{job}', [BookmarkController::class, 'destroy'])->name('bookmarks.destroy');
+});
