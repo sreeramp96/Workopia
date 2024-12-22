@@ -14,21 +14,14 @@ class JobController extends Controller
     use AuthorizesRequests;
     public function index(): View
     {
-        $jobs = Job::all();
+        $jobs = Job::paginate(9);
         return view('jobs.index')->with('jobs', $jobs);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('jobs.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
         $valdidateData = $request->validate([
@@ -64,26 +57,17 @@ class JobController extends Controller
         return redirect()->route('jobs.index')->with('success', 'Job listing created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Job $job): view
     {
         return view('jobs.show')->with('job', $job);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Job $job): View
     {
         $this->authorize('update', $job);
         return view('jobs.edit')->with('job', $job);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Job $job): string
     {
         $this->authorize('update', $job);
@@ -120,9 +104,6 @@ class JobController extends Controller
         return redirect()->route('jobs.index')->with('success', 'Job listing updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Job $job): RedirectResponse
     {
         $this->authorize('delete', $job);
@@ -131,6 +112,11 @@ class JobController extends Controller
             Storage::delete('public/logos/' . $job->company_logo);
         }
         $job->delete();
+
+        if (request()->query('from') == 'dashboard') {
+            return redirect()->route('dashboard')->with('success', 'Job listing deleted successfully!');
+        }
+
         return redirect()->route('jobs.index')->with('success', 'Job listing deleted successfully');
     }
 }
