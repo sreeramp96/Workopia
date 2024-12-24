@@ -75,10 +75,28 @@
                     Put "Job Application" as the subject of your email
                     and attach your resume.
                 </p>
-                <a href="mailto:{{ $job->contact_email }}"
-                    class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
-                    Apply Now
-                </a>
+
+                <div x-data="{ open: false }">
+                    <button @click="open = true"
+                        class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200">Apply
+                        Now
+                        <div x-show="open"
+                            class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                            <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+                                <h3 class="text-lg font-semibold mb-4">
+                                    Apply for {{ $job->title }}</h3>
+                                <form action="" enctype="multipart/form-data">
+                                    @csrf
+                                    <x-inputs.text name="full_name" id="full_name" label="Full Name"
+                                        :required="true" />
+                                    <button type="submit"
+                                        class="bg-blue-500 hover::bg-blue-600 text-white px-4 py-2 rounded-md">Submit
+                                        Application</button>
+                                </form>
+                            </div>
+                        </div>
+                    </button>
+                </div>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-md mt-6">
@@ -117,12 +135,12 @@
                     @if (auth()->user()->bookmarkedJobs()->where('job_id', $job->id)->exists())
                         @method('DELETE')
                         <button
-                            class="bg-red-500 hover:bg-red-700 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify--center">
+                            class="bg-red-500 hover:bg-red-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center">
                             <i class="fas fa-bookmark mr-3"></i>Remove Listing
                         </button>
                     @else
                         <button
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify--center">
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center">
                             <i class="fas fa-bookmark mr-3"></i>Bookmark Listing
                         </button>
                     @endif
