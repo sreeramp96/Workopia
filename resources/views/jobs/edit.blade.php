@@ -58,16 +58,16 @@
             <x-inputs.text-area id="company_description" name="company_description" label="Company Description"
                 placeholder="Enter Company Description" :value="old('company_description', $job->company_description)" />
 
-            <x-inputs.text id="company_website" name="company_website" type="url" label="Company Website"
-                placeholder="" :value="old('company_website', $job->company_website)" />
+            <x-inputs.text id="company_website" name="company_website" label="Company Website" type="url"
+                placeholder="Enter Company Website" :value="old('company_website', $job->company_website)" />
 
             <x-inputs.text id="contact_phone" name="contact_phone" label="Contact Phone"
                 placeholder="Enter Contact Phone" :value="old('contact_phone', $job->contact_phone)" />
 
             <x-inputs.text id="contact_email" name="contact_email" label="Contact Email"
-                placeholder="Email where you want to receive applications" :value="old('contact_email', $job->contact_email)" />
+                placeholder="Enter Contact Email" type="email" :value="old('contact_email', $job->contact_email)" />
 
-            <x-inputs.file id="company_logo" name="company_logo" label="Company logo" />
+            <x-inputs.file id="company_logo" name="company_logo" label="Company Logo" />
 
             <button type="submit"
                 class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">

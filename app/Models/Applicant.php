@@ -11,8 +11,8 @@ class Applicant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'job_id',
+        'user_id',
         'full_name',
         'contact_phone',
         'contact_email',
@@ -21,11 +21,13 @@ class Applicant extends Model
         'resume_path',
     ];
 
+    // Relation to job
     public function job(): BelongsTo
     {
         return $this->belongsTo(Job::class);
     }
 
+    // Relation to user
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

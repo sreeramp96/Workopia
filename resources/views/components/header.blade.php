@@ -24,8 +24,8 @@
                 <x-button-link url='/jobs/create' icon='edit'>Create Job
                 </x-button-link>
             @else
-                <x-nav-link url="/login" :active="request()->is('login')"> Login </x-nav-link>
-                <x-nav-li,nk url="/register" :active="request()->is('register')"> Register </x-nav-li,nk>
+                <x-nav-link url="/login" :active="request()->is('login')">Login</x-nav-link>
+                <x-nav-link url="/register" :active="request()->is('register')">Register</x-nav-link>
             @endauth
         </nav>
         <button @click="open = !open" id="hamburger" class="text-white md:hidden flex items-center">

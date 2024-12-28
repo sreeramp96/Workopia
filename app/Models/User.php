@@ -11,7 +11,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -49,16 +48,19 @@ class User extends Authenticatable
         ];
     }
 
+    // Relate to job listing
     public function jobListings(): HasMany
     {
         return $this->hasMany(JobListing::class);
     }
 
+    // Relate to bookmarks
     public function bookmarkedJobs(): BelongsToMany
     {
         return $this->belongsToMany(Job::class, 'job_user_bookmarks')->withTimestamps();
     }
 
+    // Relation to applicants
     public function applicants(): HasMany
     {
         return $this->hasMany(Applicant::class, 'user_id');
