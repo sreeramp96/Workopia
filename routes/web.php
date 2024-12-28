@@ -11,7 +11,7 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\ApplicantController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::resource('jobs', JobController::class);
+Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
 Route::resource('jobs', JobController::class)->middleware('auth')->only(['create', 'edit', 'update', 'destroy']);
 Route::resource('jobs', JobController::class)->except(['create', 'edit', 'update', 'destroy']);
 Route::middleware('guest')->group(function () {
@@ -30,3 +30,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/jobs/{job}/apply', [ApplicantController::class, 'store'])->name('applicant.store')->middleware('auth');
+Route::delete('/applicants/{applicant}', [ApplicantController::class, 'destroy'])->name('applicant.destroy')->middleware('auth');
