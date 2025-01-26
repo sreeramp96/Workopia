@@ -14,7 +14,7 @@ class JobSeeder extends Seeder
      */
     public function run(): void
     {
-        $joblistings = include database_path('seeders\data\job_listings.php');
+        $joblistings = include database_path('seeders/data/job_listings.php');
         $testUserId = User::where('email', 'test@test.com')->value('id');
         $userIds = User::where('email', '!=', 'test@test.com')->pluck('id')->toArray();
 
